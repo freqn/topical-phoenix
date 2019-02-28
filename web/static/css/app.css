@@ -10,3 +10,6 @@
   position: relative;
   margin-bottom: 25px;
 }
+.no-underline > a {
+  text-decoration: none !important;
+}
