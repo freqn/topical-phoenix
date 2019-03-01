@@ -4,21 +4,24 @@
   <%= for topic <- @topics do %>
     <li class="collection-item">
       <%= topic.title %>
-      <div class="right no-underline">
-        <%= link to: topic_path(@conn, :edit, topic) do %>
-          <i class="material-icons no-underline">edit</i>
-        <% end %>
-        <%= link to: topic_path(@conn, :delete, topic), method: :delete, class: "no-underline" do %>
-          <i class="material-icons">delete</i>
-        <% end %>
-      </div>
+      <%= if @conn.assigns.user.id == topic.user_id do %>
+        <div class="right no-underline">
+          <%= link to: topic_path(@conn, :edit, topic) do %>
+            <i class="material-icons no-underline">edit</i>
+          <% end %>
+          <%= link to: topic_path(@conn, :delete, topic), method: :delete, class: "no-underline" do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+        </div>
+      <% end %>
     </li>
   <% end %>
 </ul>
-
-<div class="fixed-action-btn">
-  <%= link to: topic_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
-    <i class="material-icons">add</i>
-  <% end %>
-</div>
+<%= if @conn.assigns[:user] do %>
+  <div class="fixed-action-btn">
+    <%= link to: topic_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
+      <i class="material-icons">add</i>
+    <% end %>
+  </div>
+<% end %>
 
